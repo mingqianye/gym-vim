@@ -26,6 +26,10 @@ class TestVim(unittest.TestCase):
     def test_get_curpos(self):
         self.assertEqual([0, 1, 1, 0, 1], get_curpos(self.nvim))
 
+    def test_get_strings(self):
+        self.nvim.feedkeys("iham\nspam")
+        self.assertEqual(["ham", "spam"], get_strings(self.nvim))
+
     def test_get_state(self):
         self.nvim.feedkeys("iham")
         state = get_state(self.nvim)
