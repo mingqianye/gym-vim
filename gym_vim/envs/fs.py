@@ -1,9 +1,16 @@
 import subprocess
+import tempfile
+import headlessvim
 
 from typing import Tuple, List
 
-def pwd() -> str:
-    sh("pwd")
+def tt():
+    out = ""
+    with headlessvim.open(args="-N -i NONE -n -u NONE") as vim:
+        vim.send_keys("iham")
+        out = vim.echo('"blah"')
+        vim.close()
+    return out
 
 def sh(cmd: str) -> List[str]:
     out, err = sh_unsafe(cmd)

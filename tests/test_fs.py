@@ -7,5 +7,8 @@ class TestVim(unittest.TestCase):
         self.assertEqual(["a"], sh("echo a"))
         self.assertRaises(Exception, sh, "blah")
 
+    def test_tt(self):
+        self.assertEqual("blah", tt())
+
 if __name__ == '__main__':
     unittest.main()
