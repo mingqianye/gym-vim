@@ -1,16 +1,12 @@
 import subprocess
 import tempfile
-import headlessvim
+from pynvim import attach, api
 
 from typing import Tuple, List
 
-def tt():
-    out = ""
-    with headlessvim.open(args="-N -i NONE -n -u NONE") as vim:
-        vim.send_keys("iham")
-        out = vim.echo('"blah"')
-        vim.close()
-    return out
+def simple(nvim: api.nvim.Nvim) -> int:
+    return nvim.current.buffer.api.line_count()
+
 
 def sh(cmd: str) -> List[str]:
     out, err = sh_unsafe(cmd)
