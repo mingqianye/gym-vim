@@ -6,7 +6,7 @@ from pynvim import attach, api
 
 from typing import Tuple, List
 
-@dataclass
+@dataclass(eq=True, frozen=True)
 class VimState:
     mode: str
     curpos: List[int]
@@ -30,6 +30,8 @@ def get_curpos(nvim: api.nvim.Nvim) -> List[int]:
     return json.loads(s)
 
 
+
+# Not used
 def sh(cmd: str) -> List[str]:
     out, err = sh_unsafe(cmd)
     if err != None:
