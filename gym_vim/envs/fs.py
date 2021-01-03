@@ -1,5 +1,6 @@
 import subprocess
 import tempfile
+import json
 from pynvim import attach, api
 
 from typing import Tuple, List
@@ -13,6 +14,12 @@ def get_mode(nvim: api.nvim.Nvim) -> str:
 
 def get_strings(nvim: api.nvim.Nvim) -> List[str]:
     return list(nvim.current.buffer)
+
+def get_curpos(nvim: api.nvim.Nvim) -> List[int]:
+    s = nvim.command_output("echo getcurpos()")
+    #[bufnum, lnum, col, off, curswant]
+    return json.loads(s)
+
 
 def sh(cmd: str) -> List[str]:
     out, err = sh_unsafe(cmd)

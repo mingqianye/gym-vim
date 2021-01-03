@@ -26,5 +26,9 @@ class TestVim(unittest.TestCase):
         self.nvim.feedkeys("v")
         self.assertEqual("v", get_mode(self.nvim))
 
+    def test_get_curpos(self):
+        self.assertEqual([0, 1, 1, 0, 1], get_curpos(self.nvim))
+
+
 if __name__ == '__main__':
     unittest.main()
