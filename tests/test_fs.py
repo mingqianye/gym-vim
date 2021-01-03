@@ -17,5 +17,14 @@ class TestVim(unittest.TestCase):
     def test_simple(self):
         self.assertEqual(1, simple(self.nvim))
 
+    def test_get_mode(self):
+        self.assertEqual("n", get_mode(self.nvim))
+        self.nvim.feedkeys("iham")
+        self.assertEqual("i", get_mode(self.nvim))
+        self.nvim.feedkeys("\x1b") # i.e <Esc> key, see replace_termcodes()
+        self.assertEqual("n", get_mode(self.nvim))
+        self.nvim.feedkeys("v")
+        self.assertEqual("v", get_mode(self.nvim))
+
 if __name__ == '__main__':
     unittest.main()

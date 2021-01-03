@@ -5,8 +5,14 @@ from pynvim import attach, api
 from typing import Tuple, List
 
 def simple(nvim: api.nvim.Nvim) -> int:
+    nvim.feedkeys("iham")
     return nvim.current.buffer.api.line_count()
 
+def get_mode(nvim: api.nvim.Nvim) -> str:
+    return nvim.command_output("echo mode()")
+
+def get_strings(nvim: api.nvim.Nvim) -> List[str]:
+    return list(nvim.current.buffer)
 
 def sh(cmd: str) -> List[str]:
     out, err = sh_unsafe(cmd)
