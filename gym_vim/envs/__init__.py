@@ -1,1 +1,1 @@
-from gym_foo.envs.vim_env import VimEnv
+from gym_vim.envs.vim_env import VimEnv

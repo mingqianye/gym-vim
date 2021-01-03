@@ -2,7 +2,7 @@ import gym
 from gym import error, spaces, utils
 from gym.utils import seeding
 
-class FooEnv(gym.Env):
+class VimEnv(gym.Env):
     metadata = {'render.modes': ['human']}
 
     def __init__(self):
@@ -11,7 +11,9 @@ class FooEnv(gym.Env):
         ...
     def reset(self):
         ...
-    def render(self, mode='human'):
-        ...
+
+    def render(self, mode='human') -> None:
+        print("some debug info here")
+
     def close(self):
         ...
