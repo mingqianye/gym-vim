@@ -1,15 +1,15 @@
 import subprocess
 
-from typing import Tuple
+from typing import Tuple, List
 
 def pwd() -> str:
     sh("pwd")
 
-def sh(cmd: str) -> str:
+def sh(cmd: str) -> List[str]:
     out, err = sh_unsafe(cmd)
     if err != None:
         raise RuntimeError(err)
-    return out
+    return out.decode("utf-8").strip().split("\n")
     
 def sh_unsafe(cmd: str) -> Tuple[str, str]:
     out = subprocess.Popen(cmd.split(" "),
