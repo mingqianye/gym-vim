@@ -1,13 +1,22 @@
 import subprocess
 import tempfile
 import json
+from dataclasses import dataclass
 from pynvim import attach, api
 
 from typing import Tuple, List
 
-def simple(nvim: api.nvim.Nvim) -> int:
-    nvim.feedkeys("iham")
-    return nvim.current.buffer.api.line_count()
+@dataclass
+class VimState:
+    mode: str
+    curpos: List[int]
+    strings: List[str]
+
+def get_state(nvim: api.nvim.Nvim) -> VimState:
+    return VimState(
+            get_mode(nvim),
+            get_curpos(nvim),
+            get_strings(nvim))
 
 def get_mode(nvim: api.nvim.Nvim) -> str:
     return nvim.command_output("echo mode()")

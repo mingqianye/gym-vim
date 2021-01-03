@@ -14,9 +14,6 @@ class TestVim(unittest.TestCase):
         self.assertEqual(["a"], sh("echo a"))
         self.assertRaises(Exception, sh, "blah")
 
-    def test_simple(self):
-        self.assertEqual(1, simple(self.nvim))
-
     def test_get_mode(self):
         self.assertEqual("n", get_mode(self.nvim))
         self.nvim.feedkeys("iham")
@@ -29,6 +26,12 @@ class TestVim(unittest.TestCase):
     def test_get_curpos(self):
         self.assertEqual([0, 1, 1, 0, 1], get_curpos(self.nvim))
 
+    def test_get_state(self):
+        self.nvim.feedkeys("iham")
+        state = get_state(self.nvim)
+        self.assertEqual("i", state.mode)
+        self.assertEqual([0, 1, 4, 0, 4], state.curpos)
+        self.assertEqual(["ham"], state.strings)
 
 if __name__ == '__main__':
     unittest.main()
