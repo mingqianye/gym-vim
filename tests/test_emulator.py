@@ -17,6 +17,9 @@ class TestEmulator(unittest.TestCase):
     def test_simple_input(self):
         ob, reward, done, info = self.e.step("i")
         self.assertEqual(ob.last_action, "i")
+        self.assertEqual(ob.mode, "i")
+        self.assertEqual(ob.curpos, [0, 1, 1, 0, 1])
+        self.assertEqual(ob.strings, [""])
         self.assertEqual(reward, 0)
         self.assertEqual(done, False)
         self.assertEqual(info, {})
