@@ -5,7 +5,7 @@ from pynvim import attach
 
 class TestVim(unittest.TestCase):
     def setUp(self):
-        self.nvim = attach('child', argv=["/bin/env", "nvim", "--embed", "--headless"])
+        self.nvim = attach('child', argv=["/bin/env", "nvim", "--embed", "--headless", "--noplugin", "--clean", "-n"])
 
     def tearDown(self):
         self.nvim.quit()
