@@ -29,6 +29,12 @@ def get_curpos(nvim: api.nvim.Nvim) -> List[int]:
     #[bufnum, lnum, col, off, curswant]
     return json.loads(s)
 
+def is_valid(nvim: api.nvim.Nvim) -> bool:
+    return nvim.current.buffer.valid
+
+def feedkeys(nvim: api.nvim.Nvim, s: str) -> None:
+    nvim.feedkeys(s)
+
 
 
 # Not used
