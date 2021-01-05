@@ -3,6 +3,8 @@ from gym_vim.envs.emulator import Emulator, EmulatorState, ScreenString, Emulato
 from gym_vim.envs.encoder import Encoder
 from gym_vim.envs.keys import keystrokes, displayable_chars, modes
 
+from gym import spaces
+
 from typing import NewType, Tuple, Dict, List
 
 EncodedObservation = NewType("EncodedObservation", np.ndarray)
@@ -22,7 +24,7 @@ class EncodedEmulator:
         self._char_encoder: Encoder = Encoder(all_chars)
         self._mode_encoder: Encoder = Encoder(all_modes)
         self._max_string_len: int = max_string_len
-        
+
     def step(self, encoded_action) -> Tuple[EncodedObservation, int, bool, Dict]:
         ob, reward, done, info = self._emulator.step(
                 self._action_encoder.decode(encoded_action))
@@ -54,3 +56,7 @@ class EncodedEmulator:
         for c in s.ljust(self._max_string_len):
             arrs.append(self._char_encoder.encode(c))
         return np.concatenate(arrs)
+
+    def action_space(self):
+        return spaces.Discrete(self._action_encoder.size())
+

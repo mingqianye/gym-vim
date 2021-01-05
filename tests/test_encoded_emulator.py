@@ -19,7 +19,9 @@ class TestEncodedEmulator(unittest.TestCase):
     def test_simple_input(self):
         encoded_action = self.e.encode_action("a")
         ob, reward, done, info = self.e.step(encoded_action)
-        print(info)
+
+    def test_action_space(self):
+        self.assertEqual(True, 0 <= self.e.action_space().sample() <= 2)
 
 if __name__ == '__main__':
     unittest.main()
