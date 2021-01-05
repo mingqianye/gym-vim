@@ -25,6 +25,7 @@ class TestEncodedEmulator(unittest.TestCase):
 
     def test_observation_space(self):
         #self.assertEqual(43, self.e.observation_space().sample().size)
+        #self.assertEqual(1, self.e.observation_space().shape)
         pass
 
 if __name__ == '__main__':
