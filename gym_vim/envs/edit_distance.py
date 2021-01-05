@@ -1,3 +1,8 @@
+from typing import List
+
+def arr_edit_distance(ss1: List[str], ss2: List[str]) -> int:
+    return edit_distance("".join(ss1), "".join(ss2))
+
 def edit_distance(s1: str, s2: str) -> int:
     if s1 == s2:
         return 0

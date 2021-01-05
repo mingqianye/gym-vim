@@ -16,5 +16,9 @@ class TestEditDistance(unittest.TestCase):
         self.assertEqual(edit_distance("ab C", "ab cd"), 2)
         self.assertEqual(edit_distance("ab c", "efg"), 4)
 
+    def test_arr_distance(self):
+        self.assertEqual(arr_edit_distance(["a","a"], ["ab","a"]), 1)
+
+
 if __name__ == '__main__':
     unittest.main()
