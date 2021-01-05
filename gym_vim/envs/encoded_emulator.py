@@ -53,7 +53,7 @@ class EncodedEmulator:
                 self._mode_encoder.encode(ob.mode),
                 ob.curpos,
                 self.__encode_string(ob.string)
-        ])
+        ]).astype(np.uint8)
 
     def __encode_string(self, s: ScreenString) -> np.ndarray:
         arrs = []
@@ -65,11 +65,10 @@ class EncodedEmulator:
         return spaces.Discrete(self._action_encoder.size())
 
     def observation_space(self):
-        encoded_ob = self.__cur_encoded_ob()
         return spaces.Box(
                 low=0, 
                 high=5, 
-                shape=(1, encoded_ob.size),
+                shape=(1,),
                 dtype=np.uint8
                 )
 
