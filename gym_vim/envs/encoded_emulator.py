@@ -60,3 +60,13 @@ class EncodedEmulator:
     def action_space(self):
         return spaces.Discrete(self._action_encoder.size())
 
+    def observation_space(self):
+        ob = self._emulator.cur_observation()
+        encoded_ob = self.__encode_ob(ob)
+        return spaces.Box(
+                low=0, 
+                high=5, 
+                shape=(1, encoded_ob.size)
+                )
+
+

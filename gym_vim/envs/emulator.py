@@ -63,6 +63,9 @@ class Emulator:
         self._target_string: ScreenString = target_string
         self._max_steps: int = max_steps
 
+    def cur_observation(self) -> EmulatorState:
+        return self._emulator_states[-1]
+
     def step(self, action: EmulatorAction) -> Tuple[EmulatorState, int, bool, Dict]:
         self._emulator_states.append(self._nvim.send_action(action))
 

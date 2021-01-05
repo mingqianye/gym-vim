@@ -23,5 +23,8 @@ class TestEncodedEmulator(unittest.TestCase):
     def test_action_space(self):
         self.assertEqual(True, 0 <= self.e.action_space().sample() <= 2)
 
+    def test_observation_space(self):
+        self.assertEqual(43, self.e.observation_space().sample().size)
+
 if __name__ == '__main__':
     unittest.main()
