@@ -22,7 +22,6 @@ class TestEmulator(unittest.TestCase):
         self.assertEqual(ob.string, "spam")
         self.assertEqual(reward, -1)
         self.assertEqual(done, False)
-        self.assertEqual(info, {})
 
     def test_simple_input2(self):
         ob, reward, done, info = self.e.step("x")
@@ -35,7 +34,6 @@ class TestEmulator(unittest.TestCase):
         self.assertEqual(ob.string, "ham")
         self.assertEqual(reward, 100)
         self.assertEqual(done, True)
-        self.assertEqual(info, {})
 
 if __name__ == '__main__':
     unittest.main()

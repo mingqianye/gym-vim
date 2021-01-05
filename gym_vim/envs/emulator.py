@@ -68,7 +68,7 @@ class Emulator:
 
         reward = self.__reward()
         done = self.__is_done()
-        info = {}
+        info = {"states": self._emulator_states}
 
         return self._emulator_states[-1], reward, done, info
 

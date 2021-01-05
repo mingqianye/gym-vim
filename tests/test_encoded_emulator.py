@@ -18,10 +18,8 @@ class TestEncodedEmulator(unittest.TestCase):
 
     def test_simple_input(self):
         encoded_action = self.e.encode_action("a")
-        print(encoded_action)
         ob, reward, done, info = self.e.step(encoded_action)
-        self.assertEqual(ob[1], 0)
-
+        print(info)
 
 if __name__ == '__main__':
     unittest.main()
