@@ -69,6 +69,7 @@ class EncodedEmulator:
         return spaces.Box(
                 low=0, 
                 high=5, 
-                shape=(1, encoded_ob.size)
+                shape=(1, encoded_ob.size),
+                dtype=np.uint8
                 )
 
