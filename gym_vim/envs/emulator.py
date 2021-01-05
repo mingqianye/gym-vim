@@ -18,12 +18,9 @@ class EmulatorState:
     string: ScreenString
 
 class NvimWrapper:
-    _nvim: pynvim.api.nvim.Nvim
-    _start_string: ScreenString
-
     def __init__(self, start_string: ScreenString):
-        self._nvim = NvimWrapper.__new_nvim_instance(start_string)
-        self._state_string = start_string
+        self._nvim: pynvim.api.nvim.Nvim = NvimWrapper.__new_nvim_instance(start_string)
+        self._state_string: ScreenString = start_string
 
     def inital_state(self) -> EmulatorState:
         return NvimWrapper.__state_with_action(self._nvim, "")
@@ -60,16 +57,11 @@ class NvimWrapper:
         self._nvim = NvimWrapper.__new_nvim_instance(self._state_string)
 
 class Emulator:
-    _nvim: NvimWrapper
-    _emulator_states: List[EmulatorState]
-    _target_string: ScreenString
-    _max_steps: int
-
     def __init__(self, start_string: ScreenString, target_string: ScreenString, max_steps: int):
-        self._nvim = NvimWrapper(start_string)
-        self._emulator_states = [self._nvim.inital_state()]
-        self._target_string = target_string
-        self._max_steps = max_steps
+        self._nvim: NvimWrapper = NvimWrapper(start_string)
+        self._emulator_states: List[EmulatorState] = [self._nvim.inital_state()]
+        self._target_string: ScreenString = target_string
+        self._max_steps: int = max_steps
 
     def step(self, action: EmulatorAction) -> Tuple[EmulatorState, int, bool, Dict]:
         self._emulator_states.append(self._nvim.send_action(action))

@@ -2,7 +2,7 @@ import unittest
 
 import gym_vim
 import numpy as np
-from gym_vim.envs.encoder import *
+from gym_vim.envs.encoder import Encoder
 
 class TestEncoder(unittest.TestCase):
     def test_encode(self):

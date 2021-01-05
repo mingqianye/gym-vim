@@ -5,9 +5,14 @@ def all_chars() -> List[str]:
     upper_letters = lower_letters.upper()
     nums = "1234567890"
     symbs = '~!@#$%^&*()_+' + '[]\;,./' + "'" + '{}|:"<>?'
-    return list(lower_letters + upper_letters + nums + symbs)
+    space = " "
+    enter = "\n"
+    return list(space + lower_letters + upper_letters + nums + symbs)
 
-enter: str = "\n"
 esc: str = "\x1b"
 
-keystrokes: List[str] = all_chars() + [enter, esc]
+displayable_chars: List[str] = all_chars() + [""]
+
+keystrokes: List[str] = all_chars() + [esc, ""]
+
+modes: List[str] = ["n", "no", "nov", "noV", "noCTRL-V", "niI", "niR", "niV", "v", "V", "CTRL-V", "s", "S", "CTRL-S", "i", "ic", "ix", "R", "Rc", "Rv", "Rx", "c", "cv", "ce", "r", "rm", "r?", "!", "t"]

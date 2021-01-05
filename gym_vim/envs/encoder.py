@@ -7,9 +7,6 @@ from typing import Tuple, List, Dict, TypeVar, Generic
 T = TypeVar("T")
 
 class Encoder(Generic[T]):
-    _label_encoder: LabelEncoder
-    _lookup_dict: Dict[str, np.ndarray] = {}
-
     def __init__(self, ll: List[T]): 
         ss = Encoder._convert_to_string_arr(ll)
 
@@ -19,14 +16,19 @@ class Encoder(Generic[T]):
 
         onehot_encoded = Encoder._onehot_encode(label_encoded)
 
+        self._lookup_dict: Dict[str, np.ndarray] = {}
+
         for i, item in enumerate(ss):
             self._lookup_dict[item] = onehot_encoded[i]
 
     def encode(self, item: T) -> np.ndarray:
         return self._lookup_dict[str(item)]
 
-    def decode(self, arr: np.ndarray) -> np.ndarray:
-        return self._label_encoder.inverse_transform([np.argmax(arr)])
+    def decode(self, arr: np.ndarray) -> str:
+        return self._label_encoder.inverse_transform([np.argmax(arr)])[0]
+
+    def get_dict(self) -> Dict[str, np.ndarray]:
+        return self._lookup_dict
 
     def size(self) -> int:
         return len(self._lookup_dict)
