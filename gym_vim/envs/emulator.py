@@ -38,7 +38,7 @@ class NvimWrapper:
                 "".join(vimstate.strings))
 
     def __new_nvim_instance(start_string: ScreenString) -> pynvim.api.nvim.Nvim:
-        nvim = pynvim.attach('child', argv=["/bin/env", "nvim", "--embed", "--headless", "--noplugin", "--clean", "-n"])
+        nvim = pynvim.attach('child', argv=["nvim", "--embed", "--headless", "--noplugin", "--clean", "-n"])
         feedkeys(nvim, "i")
         feedkeys(nvim, start_string)
         feedkeys(nvim, esc)
