@@ -31,8 +31,9 @@ class EncodedEmulator:
 
         return self.__encode_ob(ob), reward, done, info
 
-    def reset(self):
+    def reset(self) -> EncodedObservation:
         self._emulator.reset()
+        return self.__cur_encoded_ob()
 
     def render(self):
         self._emulator.render()
@@ -42,6 +43,9 @@ class EncodedEmulator:
 
     def encode_action(self, action: EmulatorAction) -> np.ndarray:
         return self._action_encoder.encode(action)
+
+    def __cur_encoded_ob(self) -> EncodedObservation:
+        return self.__encode_ob(self._emulator.cur_observation())
 
     def __encode_ob(self, ob: EmulatorState) -> EncodedObservation:
         return np.concatenate([
@@ -61,12 +65,10 @@ class EncodedEmulator:
         return spaces.Discrete(self._action_encoder.size())
 
     def observation_space(self):
-        ob = self._emulator.cur_observation()
-        encoded_ob = self.__encode_ob(ob)
+        encoded_ob = self.__cur_encoded_ob()
         return spaces.Box(
                 low=0, 
                 high=5, 
                 shape=(1, encoded_ob.size)
                 )
-
 
