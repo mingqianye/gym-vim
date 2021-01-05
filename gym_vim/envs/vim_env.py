@@ -18,6 +18,7 @@ class VimEnv(gym.Env):
         return self.emulator.reset()
 
     def render(self, mode='human') -> None:
+        print("Rendering...")
         self.emulator.reset()
 
     def close(self):
