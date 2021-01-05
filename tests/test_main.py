@@ -1,8 +1,6 @@
 import unittest
 import gym
 
-import gym_vim
-
 class TestVim(unittest.TestCase):
     def test_env(self):
         env = gym.make("vim-v0")
