@@ -2,7 +2,7 @@ from setuptools import setup
 
 setup(
     name='gym_vim',
-    version='0.0.10',
+    version='0.0.11',
     url="https://github.com/mingqianye/gym_vim",
     author="Mingqian Ye",
     license="MIT",
