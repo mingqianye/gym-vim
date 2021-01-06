@@ -1,6 +1,7 @@
 import subprocess
 import tempfile
 import json
+import time
 from dataclasses import dataclass
 from pynvim import attach, api
 
@@ -9,17 +10,21 @@ from typing import Tuple, List
 @dataclass(eq=True, frozen=True)
 class VimState:
     mode: str
+    blocking: bool
     curpos: List[int]
     strings: List[str]
 
 def get_state(nvim: api.nvim.Nvim) -> VimState:
+    mode = get_mode(nvim)
     return VimState(
-            get_mode(nvim),
-            get_curpos(nvim),
-            get_strings(nvim))
+            mode["mode"],
+            mode["blocking"],
+            [] if mode["blocking"] else get_curpos(nvim),
+            [] if mode["blocking"] else get_strings(nvim))
 
+# returns: {'mode': 'n', 'blocking': False}, only this call is async
 def get_mode(nvim: api.nvim.Nvim) -> str:
-    return nvim.command_output("echo mode()")
+    return nvim.request("nvim_get_mode")
 
 def get_strings(nvim: api.nvim.Nvim) -> List[str]:
     return list(nvim.current.buffer)
@@ -30,12 +35,13 @@ def get_curpos(nvim: api.nvim.Nvim) -> List[int]:
     return json.loads(s)
 
 def is_valid(nvim: api.nvim.Nvim) -> bool:
-    return nvim.current.buffer.valid
+    # cannot use .valid because it is blocking
+    #return nvim.current.buffer.valid 
+    return get_mode(nvim) is not None
 
 def feedkeys(nvim: api.nvim.Nvim, s: str) -> None:
-    nvim.feedkeys(s)
-
-
+    nvim.input(s)
+    #nvim.feedkeys(s)
 
 # Not used
 def sh(cmd: str) -> List[str]:

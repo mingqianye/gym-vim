@@ -12,13 +12,13 @@ class TestVim(unittest.TestCase):
         self.nvim.close()
 
     def test_get_mode(self):
-        self.assertEqual("n", get_mode(self.nvim))
+        self.assertEqual({'mode': 'n', 'blocking': False}, get_mode(self.nvim))
         self.nvim.feedkeys("iham")
-        self.assertEqual("i", get_mode(self.nvim))
+        self.assertEqual({'mode': 'i', 'blocking': False}, get_mode(self.nvim))
         self.nvim.feedkeys("\x1b") # i.e <Esc> key, see replace_termcodes()
-        self.assertEqual("n", get_mode(self.nvim))
+        self.assertEqual({'mode': 'n', 'blocking': False}, get_mode(self.nvim))
         self.nvim.feedkeys("v")
-        self.assertEqual("v", get_mode(self.nvim))
+        self.assertEqual({'mode': 'v', 'blocking': False}, get_mode(self.nvim))
 
     def test_get_curpos(self):
         self.assertEqual([0, 1, 1, 0, 1], get_curpos(self.nvim))

@@ -7,12 +7,11 @@ def all_chars() -> List[str]:
     symbs = '~!@#$%^&*()_+' + '[]\;,./' + "'" + '{}|:"<>?'
     space = " "
     enter = "\n"
-    return list(space + lower_letters + upper_letters + nums + symbs)
+    #return list(space + lower_letters + upper_letters + nums + symbs)
+    return list("abcr" + space)
 
 esc: str = "\x1b"
 
-displayable_chars: List[str] = all_chars() + [""]
-
-keystrokes: List[str] = all_chars() + [esc, ""]
+chars: List[str] = all_chars() + [esc, ""]
 
 modes: List[str] = ["n", "no", "nov", "noV", "noCTRL-V", "niI", "niR", "niV", "v", "V", "CTRL-V", "s", "S", "CTRL-S", "i", "ic", "ix", "R", "Rc", "Rv", "Rx", "c", "cv", "ce", "r", "rm", "r?", "!", "t"]

@@ -42,7 +42,6 @@ class Encoder(Generic[T]):
             label_encoded.reshape(len(label_encoded), 1)
         )
 
-
     def _convert_to_string_arr(ll: List[T]) -> List[str]:
         ss = []
         for l in ll:

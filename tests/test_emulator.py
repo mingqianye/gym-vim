@@ -6,7 +6,7 @@ from gym_vim.envs.emulator import *
 
 class TestEmulator(unittest.TestCase):
     def setUp(self):
-        self.e = Emulator("spam", "ham", 30)
+        self.e = Emulator("spam", "ham", 30, 5)
 
     def tearDown(self):
         self.e.close()

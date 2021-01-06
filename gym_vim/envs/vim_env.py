@@ -7,7 +7,7 @@ class VimEnv(gym.Env):
     metadata = {'render.modes': ['human']}
 
     def __init__(self):
-        self.emulator = EncodedEmulator("abc", "abC", 5, 5)
+        self.emulator = EncodedEmulator("abc", "a c", 4, 5)
         self.action_space = self.emulator.action_space()
         self.observation_space = self.emulator.observation_space()
 
